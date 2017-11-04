@@ -1,0 +1,24 @@
+{
+  "name": "blue-hack-insurance",
+  "version": "1.0.0",
+  "description": "hackathon sabana university, IBM",
+  "main": "index.js",
+  "dependencies": {
+    "dotenv": "^4.0.0",
+    "watson-developer-cloud": "^2.42.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/whispers16/blue-hack-insurance.git"
+  },
+  "author": "Fabian monsalve, luis gil",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/whispers16/blue-hack-insurance/issues"
+  },
+  "homepage": "https://github.com/whispers16/blue-hack-insurance#readme"
+}
