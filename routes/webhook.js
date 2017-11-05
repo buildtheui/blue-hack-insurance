@@ -4,6 +4,7 @@ const responseToMessenger = require('./response/ai-request');
 const responseSchema = require('./response/response-schemas');
 const postbackBehaviour = require('./postback-behaviour/postback-handling');
 const webhookDispatcher = require('./webhook-dispatcher');
+const validateUser = require('./validations/validate-user');
 const express = require('express');
 const conversationWT = require('watson-developer-cloud/conversation/v1');
 const router = express.Router();
@@ -43,6 +44,9 @@ function sendMessage(event) {
   var sender = event.sender.id;
   var text = event.message.text;
   watsonResponse(text, sender);
+  validateUser.validateMessengerUser(sender, (response)=> {
+    console.log(response);
+  });
 }
 
 function sendMessagePostback(event) {
