@@ -13,6 +13,15 @@ exports.actionDispatcher = function (entityName, cd) {
       }); 
       break;
     
+    case "conditions":
+      businessResponse.showRegisterFile((response) => {
+        cd({
+          speech: JSON.stringify(response),
+          displayText: JSON.stringify(response)
+        });
+      });
+      break;
+    
     case "support.brochure":
       businessResponse.showBrochure(req.body.sessionId, (response) => {
         businessResponse.showBrochureText(req.body.sessionId);

@@ -2,22 +2,16 @@ var PRODUCTION = process.env.PRODUCTION || null;
 
 const menu = [{
   content_type: "text",
-  title: "Como me inscribo",
-  payload: "VIEW_PROMOS",
-  image_url: "https://easycardfiles.blob.core.windows.net/files/discount.png"
+  title: "Soy maestro",
+  payload: "IM_MAESTRO",
+  image_url: "http://www.freeiconspng.com/uploads/teachers-icon-11.png"
 },
 {
   content_type: "text",
-  title: "Seguros",
-  payload: "VIEW_MY_POINTS",
+  title: "Plan maestro integral",
+  payload: "VIEW_PLAN_MAESTRO",
   image_url: "https://easycardfiles.blob.core.windows.net/files/trophy.png"
 },
-/* {
-  content_type: "text",
-  title: "Ver comercios",
-  payload: "VIEW_BUSINESSES",
-  image_url: "https://easycardfiles.blob.core.windows.net/files/store.png"
-}, */
 {
   content_type: "text",
   title: "Contacto",

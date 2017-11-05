@@ -76,6 +76,7 @@ function watsonResponse(text, sender) {
         if (intentRes) {
           try {
             responseToMessenger.watsonResponse(sender, JSON.parse(intentRes.speech));
+            sendMenu(sender);
           } catch (e) {
             responseToMessenger.watsonResponse(sender, { text: intentRes.speech });
           }
