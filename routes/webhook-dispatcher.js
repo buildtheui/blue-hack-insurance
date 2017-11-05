@@ -1,36 +1,30 @@
-const businessFeedback = require('./actions/business-feedback');
+const businessResponse = require('./actions/business');
 
-exports.actionDispatcher = function (req, cd) {
+exports.actionDispatcher = function (entityName, cd) {
   //console.log(req.body.result);
-  switch (req.body.result.action) {
+  switch (entityName) {
 
-    case "support.askingFeedback":
-      businessFeedback.sendFeedbackLink(req.body.sessionId, (response) => {
+    case "registry":
+      businessResponse.showRegisterFile((response) => {
         cd({
           speech: JSON.stringify(response),
-          displayText: JSON.stringify(response),
-          source: 'support.points'
+          displayText: JSON.stringify(response)
         });
       }); 
       break;
     
     case "support.brochure":
-      businessFeedback.showBrochure(req.body.sessionId, (response) => {
-        businessFeedback.showBrochureText(req.body.sessionId);
+      businessResponse.showBrochure(req.body.sessionId, (response) => {
+        businessResponse.showBrochureText(req.body.sessionId);
         cd({
           speech: JSON.stringify(response),
-          displayText: JSON.stringify(response),
-          source: 'support.brochure'
+          displayText: JSON.stringify(response)
         });      
       });
 
       break;
 
     default:
-      cd({
-        speech: "Aún estoy aprendiendo, ¿podrias repetirme de nuevo por favor?",
-        displayText: "Aún estoy aprendiendo, ¿podrias repetirme de nuevo por favor?",
-        source: 'fallback'
-      });
+      cd(null);
   }
 }

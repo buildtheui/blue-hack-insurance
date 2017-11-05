@@ -26,6 +26,7 @@ const menu = [{
 }];
 
 module.exports = {
-  brochure: 'https://easycardfiles.blob.core.windows.net/files/EasyCard-brochure.pdf',
+  termsAndConditions: 'https://easycardfiles.blob.core.windows.net/files/seguros-bolivar-files.pdf',
+  registerDocument: 'https://easycardfiles.blob.core.windows.net/files/seguros-bolivar-files.pdf',
   menu: menu
 }

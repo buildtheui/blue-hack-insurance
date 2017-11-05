@@ -18,7 +18,7 @@ const responseListBusinesses = [
   'Aqui puedes ver los comercios 👇'
 ]
 
-exports.sendFeedbackLink = function (senderId, cb) {
+exports.sendResponseLink = function (senderId, cb) {
   var textMessage = feedbackResponses[Math.floor(Math.random() * feedbackResponses.length)];
   var buttons = [{
     "type": "web_url",
@@ -32,22 +32,8 @@ exports.sendFeedbackLink = function (senderId, cb) {
   cb(response);
 }
 
-exports.listBusinesses = function (senderId, cb) {
-  var textMessage = responseListBusinesses[Math.floor(Math.random() * responseListBusinesses.length)];
-  var buttons = [{
-    "type": "web_url",
-    "url": configSharing.viewBusinesses,
-    "title": "Ver comercios",
-    "messenger_extensions": true,
-    "fallback_url": configSharing.viewBusinesses
-
-  }]
-  var response = responseSchema.responseTempleteButton(textMessage, buttons);
-  cb(response);
-}
-
-exports.showBrochure = function (senderId, cb) {
-  var response = responseSchema.fileResponse(configSharing.brochure);
+exports.showRegisterFile = function (cb) {
+  var response = responseSchema.fileResponse(configSharing.registerDocument);
   cb(response);
 }
 

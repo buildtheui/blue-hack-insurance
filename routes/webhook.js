@@ -24,7 +24,7 @@ router.post('/', function (req, res) {
   if (req.body.object === 'page') {
     req.body.entry.forEach((entry) => {
       entry.messaging.forEach((event) => {
-        console.log(event)
+        //console.log(event)
         if (event.postback && event.postback.payload) {
           sendMessagePostback(event)
         } else if (event.message && event.message.text) {
@@ -44,8 +44,7 @@ function sendMessage(event) {
   var sender = event.sender.id;
   var text = event.message.text;
   watsonResponse(text, sender);
-  validateUser.validateMessengerUser(sender, (response)=> {
-    console.log(response);
+  validateUser.validateMessengerUser(sender, (response) => {
   });
 }
 
@@ -72,21 +71,32 @@ function watsonResponse(text, sender) {
       console.error(err);
     } else {
       console.log(JSON.stringify(response, null, 2));
-      responseToMessenger.watsonResponse(sender, {text: response.output.text[0] });
-      sendMenu(sender, response.output.text[0]);
+      var intent = response.intents[0].intent;
+      webhookDispatcher.actionDispatcher(intent, (intentRes) => {
+        if (intentRes) {
+          try {
+            responseToMessenger.watsonResponse(sender, JSON.parse(intentRes.speech));
+          } catch (e) {
+            responseToMessenger.watsonResponse(sender, { text: intentRes.speech });
+          }
+        } else {
+          responseToMessenger.watsonResponse(sender, { text: response.output.text[0] });
+        }
+        sendMenu(sender);
+      });
     }
   });
 }
 
-function sendMenu(sender, message) {
+function sendMenu(sender) {
   setTimeout(() => {
     // Ayways show a memu of actions after a response
-      responseToMessenger.watsonResponse(sender, responseSchema.responseQuickReply('¿Qué deseas hacer?', configSharing.menu));
+    responseToMessenger.watsonResponse(sender, responseSchema.responseQuickReply('¿Qué deseas hacer?', configSharing.menu));
   }, 1000);
 }
 
 /* Handling intents */
-function responseAction () {
+function responseAction() {
   webhookDispatcher.actionDispatcher(req, (response) => {
     return response
   });
